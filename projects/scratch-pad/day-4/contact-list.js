@@ -35,7 +35,12 @@
 
 // YOUR CODE GOES BELOW HERE //
 function makeContact(id, nameFirst, nameLast) {
-
+   // its gonna return an object that has the arguement ids as values to keys matching their names 
+     return {
+         id : id,
+         nameFirst : nameFirst,
+         nameLast : nameLast
+     };
 } 
 
 
@@ -43,14 +48,44 @@ function makeContactList() {
     /*
      * You need something here to hold contacts. See length api for a hint:
      */
-    var contacts;
-    
+    var contacts = [];
+   
     return {
         // we implemented the length api for you //
         length: function() {
             return contacts.length;
+        },
+        // this will push a contact into the contact array
+        addContact: function(contact){
+            contacts.push(contact);
+            return contacts;
+            
+        },
+        findContact: function(fullName){
+      // this will search through the contact array and return a contact if it matches and if not it will return undefined
+            for (var i = 0; i < contacts.length; i++){
+                console.log(`${contacts[i].nameFirst} ${contacts[i].nameLast}`)
+                if (fullName === `${contacts[i].nameFirst} ${contacts[i].nameLast}`){
+                    return  contacts[i];
+                }
+                else {return undefined;}
+            }
+        },
+        // this will remove the contact entered from the contacts array
+        removeContact: function(contact){
+            contacts.pop(contact);
+        },
+        
+        // this will print all contacts in the array with a space between them
+        printAllContactNames: function(){
+            var arr = [];
+            for(var i = 0; i < contacts.length; i++){
+               arr.push( `${contacts[i].nameFirst} ${contacts[i].nameLast}`);
+            }
+           return arr.join("\n");
         }
-    }
+    
+    };
 }
 
 
