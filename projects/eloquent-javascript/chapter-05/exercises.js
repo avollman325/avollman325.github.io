@@ -2,7 +2,12 @@
 // flatten /////////////////////////////////////////////////////////////////////
 // /////////////////////////////////////////////////////////////////////////////
 
-function flatten() {
+function flatten(array) {
+let flatArray = array.reduce((acc, val) => {
+  return acc.concat(val);
+},[]);
+console.log(flatArray);
+return flatArray;
 
 }
 
@@ -18,8 +23,28 @@ function loop() {
 // every ///////////////////////////////////////////////////////////////////////
 // /////////////////////////////////////////////////////////////////////////////
 
-function every() {
-
+function every(collection, func) {
+ if (Array.isArray(collection)){
+        for (let i = 0; i < collection.length; i++){
+            if (func === undefined){
+                if (!collection[i]){
+                    return false;
+                }
+            } else if (func(collection[i], i, collection) !== true){
+                return false;
+            }
+        }
+    } else if (collection instanceof Object){
+        for (var key in collection){
+            if (func === undefined){
+                if (!collection[key]){
+                    return false;
+                }
+            } else if (func(collection[key], key, collection) !== true){
+                return false;
+            }
+        }
+    } return true;
 }
 
 // /////////////////////////////////////////////////////////////////////////////

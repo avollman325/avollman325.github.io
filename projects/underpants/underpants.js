@@ -456,21 +456,16 @@ _.some = function(collection, func){
 * Examples:
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
-_.reduce = function (arr, func, seed) {
-    let accumulatedValue = seed || seed === undefined;
-    
-    for(let i = 0; i < arr.length; i++) {
-     
-        accumulatedValue = func(
-            accumulatedValue,
-            arr[i],
-            i,
-            
-        );
-    }
-    
-    return accumulatedValue;
-};
+_.reduce = function(array, func, seed){
+    for (let i = 0; i < array.length; i++){ // loop through the array
+        if (seed !== undefined){ // if seed argument is passed in
+            seed = func(seed, array[i], i); //reassign seed to the outcome of the function
+        } else { // if no seed is  given
+            seed = array[0]; // assign seed to the first element in the array
+            func(seed, array[i], i); //perform function on entire array
+        }
+    } return seed; // return the result
+}
  
 
 /** _.extend
